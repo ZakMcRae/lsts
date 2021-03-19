@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="form-block bg-main-mid mt-2 p-2 mx-auto rounded-2">
+        <div class="bg-primary text-center rounded-top mx-2 p-2">
+            <h5>Account</h5>
+        </div>
+
+
+        <div class="bg-light text-dark text-center rounded-bottom mx-2 mb-2 p-2">
+            <p>Update account info</p>
+
+
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+                <div class="input-group mb-2">
+                    {{ form.username.label(class='input-group-text bg-primary text-light px-2') }}
+                    {% if form.username.errors %}
+                        {{ form.username(class='is-invalid form-control') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class='form-control') }}
+                    {% endif %}
+                </div>
+                <div class="input-group mb-2">
+                    {{ form.email.label(class='input-group-text bg-primary text-light px-2') }}
+                    {% if form.email.errors %}
+                        {{ form.email(class='is-invalid form-control') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class='form-control') }}
+                    {% endif %}
+                </div>
+            <div class="text-center">
+                {{ form.submit(class='btn btn-primary') }}
+            </div>
+        </form>
+
+    </div>
+
+
+
+
+    <div class="text-center">
+        <small class="text-white-50">Want to log out? <a href="{{ url_for('logout') }}">Click Here</a></small>
+    </div>
+    <div class="text-center">
+        <small class="text-white-50">Want to Change Password? <a href="{{ url_for('reset_request') }}">Reset Here</a></small>
+    </div>
+    </div>
+{% endblock %}

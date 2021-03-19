@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{#    modal for confirming deletion of a list#}
+    <div class="modal fade text-dark" id="delete_list_modal" tabindex="-1" aria-labelledby="delete_list_modalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete_list_modalLabel">New message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <p class="modal-p">This will delete this list and all items within. This cannot be undone.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger modal-link" href="#delete_list_modal">Delete List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="list-block bg-main-mid mx-auto mt-2 p-2 rounded-2">
+        {% for list in current_user.lists %}
+            <div class="mx-2 mb-2 rounded-2">
+                <ul class="list-group">
+                    <li class="list-group-item active">
+                        <div class="d-flex">
+                            <div class="flex-grow-1 text-center my-auto">
+                                <h5>{{ list.name }}</h5>
+                            </div>
+                            <div class="my-auto">
+                                <a class="me-1" href="{{ url_for('add_item', list_id=list.id) }}"><i
+                                        class="bi bi-plus-circle"></i></a>
+                                <a class="me-1" href="{{ url_for('edit_list', list_id=list.id) }}"><i
+                                        class="bi bi-pencil"></i></a>
+                                <a data-bs-toggle="modal" data-bs-name="{{ list.name }}" data-bs-id="{{ list.id }}"
+                                   href="#delete_list_modal"><i class="bi bi-trash"></i></a>
+                            </div>
+                        </div>
+
+                    </li>
+
+
+                    {% for item in list.items %}
+                        <li class="list-group-item sub-list">
+                            <div class="d-flex">
+                                <div class="flex-grow-1">
+                                    <div class="container">
+                                        <div class="row align-items-center">
+                                            <div class="col text-break text-center">{{ item.name }}</div>
+                                            <div class="col text-break text-center">{{ item.category }}</div>
+                                            <div class="col text-break text-center">{{ item.note }}</div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="my-auto text-nowrap">
+                                    <a class="sub-link me-1"
+                                       href="{{ url_for('edit_item', list_id=list.id, item_id=item.id) }}"><i
+                                            class="bi bi-pencil"></i></a>
+                                    <a class="sub-link"
+                                       href="{{ url_for('delete_item', list_id=list.id, item_id=item.id) }}"><i
+                                            class="bi bi-trash"></i></a>
+                                </div>
+                            </div>
+                        </li>
+
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+        <div class="container py-2">
+            <div class="text-center">
+                <a href="{{ url_for('add_list') }}"><i class="bi bi-plus-circle"></i> New List</a>
+            </div>
+        </div>
+    </div>
+
+{#    JS for confirm delete list Modal#}
+    <script>
+        var delete_list_modal = document.getElementById('delete_list_modal')
+        delete_list_modal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            var list_name = button.getAttribute('data-bs-name')
+            var list_id = button.getAttribute('data-bs-id')
+            // If necessary, you could initiate an AJAX request here
+            // and then do the updating in a callback.
+            //
+            // Update the modal's content.
+            var modalTitle = delete_list_modal.querySelector('.modal-title')
+            var modalBody = delete_list_modal.querySelector('.modal-p')
+            var modalLink = delete_list_modal.querySelector('.modal-link')
+
+            modalTitle.textContent = 'Delete List - ' + list_name
+            modalBody.textContent = 'This will delete the ' + list_name + ' list and all items within. This cannot be undone.'
+            modalLink.href = '{{ url_for('delete_list') }}' + '?list_id=' + list_id
+        })
+    </script>
+
+{% endblock %}

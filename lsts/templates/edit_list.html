@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="form-block bg-main-mid mt-2 p-2 mx-auto rounded-2">
+        <div class="bg-primary text-center rounded-top mx-2 p-2">
+            <h5>Edit List Name</h5>
+        </div>
+
+        <div class="bg-light text-dark rounded-bottom mx-2 mb-2 p-2">
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+
+                <div class="input-group mb-2">
+                    {{ form.list_name.label(class='input-group-text bg-primary text-light px-2') }}
+                    {% if form.list_name.errors %}
+                        {{ form.list_name(class='is-invalid form-control') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.list_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.list_name(class='form-control') }}
+                    {% endif %}
+                </div>
+            <div class="text-center">
+                    {{ form.submit(class='btn btn-primary') }}
+                </div>
+
+        </form>
+    </div>
+    </div>
+{% endblock %}

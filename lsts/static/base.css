@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+
+body {
+    color: #fff;
+    font-family: 'Rubik', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.sub-link {
+    color: black;
+}
+
+.sub-list {
+    color:  black;
+}
+
+a:hover {
+    color: #bebebe;
+}
+
+.bg-main-dark {
+    background-color: #002f6c;
+}
+
+.bg-main-mid {
+    background-color: #01579b;
+}
+
+.bi::before {
+    font-size: 20px;
+}
+
+.input-group-text {
+    width: 150px;
+}
+
+.form-block {
+    max-width: 1000px;
+}
+
+.list-block {
+    max-width: 1000px;
+}
+
+.message-block {
+    max-width: 1000px;
+}

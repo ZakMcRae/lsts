@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="list-block mx-auto text-center mt-2">
+        <div class="carousel slide carousel-fade" data-bs-ride="carousel" id="home-carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="3000">
+                    <img class="img-fluid rounded-2" src="../static/images/cover.png" alt="">
+                </div>
+                <div class="carousel-item" data-bs-interval="8000">
+                    <img class="img-fluid rounded-2" src="../static/images/slide1.png" alt="">
+                </div>
+                <div class="carousel-item" data-bs-interval="8000">
+                    <img class="img-fluid rounded-2" src="../static/images/slide2.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-block bg-main-mid mt-2 p-2 mx-auto rounded-2">
+        <div class="bg-primary text-center rounded-top mx-2 p-2">
+            <h1>Get Started</h1>
+        </div>
+
+    <div class="bg-light text-dark text-center rounded-bottom mx-2 mb-2 p-2 pb-3">
+        <p>Click here to sign up and get started. Let us remember your todos for you!</p>
+        <a class="btn-lg btn-primary" href="{{ url_for('register') }}">Sign Up</a>
+    </div>
+    </div>
+
+{% endblock %}
