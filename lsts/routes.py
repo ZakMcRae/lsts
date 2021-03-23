@@ -236,7 +236,7 @@ def reset_request():
 
             msg.body = f"""To reset your password for lsts.xyz please click on the following link:{url_for('reset_password', token=token, _external=True)}
             
-            If you did not request this reset, ignore it and the reset will expire."""
+If you did not request this reset, ignore it and the reset will expire."""
             mail.send(msg)
 
         flash("Request Processed - Check Your Email")
