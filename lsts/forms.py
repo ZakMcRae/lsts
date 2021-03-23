@@ -18,14 +18,14 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField("Sign Up")
 
     def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
+        user = User.query.filter(User.username.ilike(username.data)).first()
         if user:
             raise ValidationError(
                 "That username is already in use. Please try another."
             )
 
     def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
+        user = User.query.filter(User.email.ilike(email.data)).first()
         if user:
             raise ValidationError("That email is already in use. Please try another.")
 
@@ -46,7 +46,7 @@ class UpdateAccountForm(FlaskForm):
 
     def validate_username(self, username):
         if username.data != current_user.username:
-            user = User.query.filter_by(username=username.data).first()
+            user = User.query.filter(User.username.ilike(username.data)).first()
             if user:
                 raise ValidationError(
                     "That username is already in use. Please try another."
@@ -54,7 +54,7 @@ class UpdateAccountForm(FlaskForm):
 
     def validate_email(self, email):
         if email.data != current_user.email:
-            user = User.query.filter_by(email=email.data).first()
+            user = User.query.filter(User.email.ilike(email.data)).first()
             if user:
                 raise ValidationError(
                     "That email is already in use. Please try another."
@@ -96,8 +96,3 @@ class ResetPasswordForm(FlaskForm):
         "Confirm Password", validators=[DataRequired(), EqualTo("password")]
     )
     submit = SubmitField("Change Password")
-
-    def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
-        if user:
-            raise ValidationError("That email is already in use. Please try another.")
