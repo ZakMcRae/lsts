@@ -8,11 +8,14 @@ It allows users to register an account, log in. User's can then view, create, ed
 Has forms for creating and editing lists and todo items. Has an email password reset using JWT.
 I deployed this app myself on a Linode server remotely through ssh using nginx and gunicorn.
 
+![](https://i.imgur.com/9KuvKeL.png?1)
+
 ## Learned on project
 - got a familiarity to Flask web framework
 - first database, learned SQLAlchemy ORM with SQLite database
 - jinja2 templates for html
 - bootstrap/css for styling
+- responsive website that handles mobile and desktop views
 - bcrypt to hash passwords more securely
 - forms and validating the returned data
 - JWT for email reset
